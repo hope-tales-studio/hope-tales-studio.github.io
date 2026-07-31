@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hope Tales Studio</title>
+<meta name="description" content="Hope Tales Studio — 일상에 도움이 되는 작은 앱들을 만듭니다.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hope Tales Studio">
+<meta property="og:description" content="일상에 도움이 되는 작은 앱들을 만듭니다.">
+<meta property="og:url" content="https://hope-tales-studio.github.io/">
+<meta name="twitter:card" content="summary">
+<style>
+  :root {
+    --bg: #faf8fc;
+    --surface: #ffffff;
+    --text: #221f2b;
+    --text-muted: #6b6478;
+    --accent: #7c5cff;
+    --accent-soft: #efeaff;
+    --border: #ece7f2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14121a;
+      --surface: #1d1a25;
+      --text: #f2f0f7;
+      --text-muted: #a8a1b8;
+      --accent: #a08bff;
+      --accent-soft: #2a2438;
+      --border: #2c2735;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  header.site {
+    padding: 64px 0 40px;
+    text-align: center;
+  }
+  header.site h1 {
+    font-size: 30px;
+    margin: 0 0 10px;
+  }
+  header.site p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 16px;
+  }
+
+  section { padding: 40px 0; }
+  section h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+  }
+
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .app-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .app-card .app-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  a.app-top-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .app-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--accent), #b7a4ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .app-name { font-weight: 700; font-size: 17px; margin: 0; }
+  .app-desc { color: var(--text-muted); font-size: 14px; margin: 0; }
+
+  .badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--text);
+    color: var(--bg);
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .badge.disabled {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px dashed var(--border);
+    cursor: default;
+  }
+
+  footer {
+    padding: 40px 0 60px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 8px;
+  }
+  footer a:hover { color: var(--accent); }
+  footer .biz-info { font-size: 12px; }
+  footer .copyright { margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="site">
+    <h1>Hope Tales Studio</h1>
+    <p>일상에 도움이 되는 작은 앱들을 만듭니다</p>
+  </header>
+
+  <section id="apps">
+    <h2>Apps</h2>
+    <div class="apps-grid">
+
+      <!-- 달달 -->
+      <div class="app-card">
+        <a class="app-top app-top-link" href="/apps/daldal/">
+          <img class="app-icon" src="/apps/daldal/assets/icon.png" alt="달달 앱 아이콘">
+          <div>
+            <p class="app-name">달달 - 생리주기 관리</p>
+            <p class="app-desc">빠른 기록, 믿을 수 있는 예측, 완전한 프라이버시</p>
+          </div>
+        </a>
+        <div class="badges">
+          <a class="badge" href="https://apps.apple.com/kr/app/id6790807752" target="_blank" rel="noopener">App Store</a>
+          <span class="badge disabled">Google Play (출시 예정)</span>
+        </div>
+      </div>
+
+      <!-- 스냅쿡 -->
+      <div class="app-card">
+        <a class="app-top app-top-link" href="/apps/snapcook/">
+          <div class="app-icon">🍳</div>
+          <div>
+            <p class="app-name">스냅쿡 - 있는 재료로 바로 레시피</p>
+            <p class="app-desc">냉장고 속 재료로, 지금 바로 만드는 AI 레시피</p>
+          </div>
+        </a>
+        <div class="badges">
+          <span class="badge disabled">App Store (출시 예정)</span>
+          <span class="badge disabled">Google Play (출시 예정)</span>
+        </div>
+      </div>
+
+      <!-- 다음 앱이 나오면 이 구조로 카드 추가 -->
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="biz-info">
+      호프테일즈스튜디오(Hope Tales Studio) · 대표 이요안 · 사업자등록번호 153-31-01821 · 통신판매업신고 제2026-용인기흥-01243호 · 경기도 용인시 기흥구
+    </div>
+    <div class="copyright">© 2026 Hope Tales Studio</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

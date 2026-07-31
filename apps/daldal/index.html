@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>달달 - 생리주기 관리 | Hope Tales Studio</title>
+<meta name="description" content="빠른 기록, 믿을 수 있는 예측, 완전한 프라이버시. 생리주기 전문 관리 앱 달달.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="달달 - 생리주기 관리">
+<meta property="og:description" content="빠른 기록, 믿을 수 있는 예측, 완전한 프라이버시.">
+<meta property="og:url" content="https://hope-tales-studio.github.io/apps/daldal/">
+<meta name="twitter:card" content="summary">
+<style>
+  :root {
+    --bg: #faf8fc;
+    --surface: #ffffff;
+    --text: #221f2b;
+    --text-muted: #6b6478;
+    --accent: #7c5cff;
+    --accent-soft: #efeaff;
+    --border: #ece7f2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14121a;
+      --surface: #1d1a25;
+      --text: #f2f0f7;
+      --text-muted: #a8a1b8;
+      --accent: #a08bff;
+      --accent-soft: #2a2438;
+      --border: #2c2735;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 32px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  header.app-header {
+    padding: 32px 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .app-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  header.app-header h1 {
+    font-size: 24px;
+    margin: 0 0 6px;
+  }
+  header.app-header p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 24px 0 40px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--text);
+    color: var(--bg);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .badge.disabled {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px dashed var(--border);
+    cursor: default;
+  }
+
+  section { padding: 32px 0; }
+  section h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+  }
+
+  .screenshots {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .screenshot {
+    width: 170px;
+    height: 368px;
+    flex: none;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    object-fit: cover;
+  }
+
+  .features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .features li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    font-size: 14px;
+  }
+  .features li strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+  .features li span {
+    color: var(--text-muted);
+  }
+
+  .contact-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .contact-box p { color: var(--text-muted); font-size: 14px; margin: 0 0 18px; }
+  .mail-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  footer {
+    padding: 40px 0 60px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 8px;
+  }
+  footer a:hover { color: var(--accent); }
+  footer .copyright { margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="back-link" href="/">← Hope Tales Studio</a>
+
+  <header class="app-header">
+    <img class="app-icon" src="/apps/daldal/assets/icon.png" alt="달달 앱 아이콘">
+    <div>
+      <h1>달달 - 생리주기 관리</h1>
+      <p>빠른 기록, 믿을 수 있는 예측, 완전한 프라이버시</p>
+    </div>
+  </header>
+
+  <div class="badges">
+    <a class="badge" href="https://apps.apple.com/kr/app/id6790807752" target="_blank" rel="noopener">App Store</a>
+    <span class="badge disabled">Google Play (출시 예정)</span>
+  </div>
+
+  <section id="screenshots">
+    <h2>미리보기</h2>
+    <div class="screenshots">
+      <img class="screenshot" src="/apps/daldal/assets/screenshot-1.png" alt="달달 홈 화면">
+      <img class="screenshot" src="/apps/daldal/assets/screenshot-2.png" alt="달달 기록 화면">
+      <img class="screenshot" src="/apps/daldal/assets/screenshot-3.png" alt="달달 분석 화면">
+      <img class="screenshot" src="/apps/daldal/assets/screenshot-4.png" alt="달달 리포트 화면">
+    </div>
+  </section>
+
+  <section id="features">
+    <h2>주요 기능</h2>
+    <ul class="features">
+      <li>
+        <strong>빠른 기록</strong>
+        <span>탭 2~3번으로 오늘의 상태를 기록할 수 있어요.</span>
+      </li>
+      <li>
+        <strong>믿을 수 있는 예측</strong>
+        <span>최근 주기 데이터를 기반으로 다음 생리·배란·가임기를 예측해요.</span>
+      </li>
+      <li>
+        <strong>완전한 프라이버시</strong>
+        <span>모든 건강 데이터는 기기 안에만 암호화 저장되고, 외부 서버로 전송되지 않아요.</span>
+      </li>
+      <li>
+        <strong>병원 연계 리포트</strong>
+        <span>최근 6개월 기록을 PDF로 만들어 공유할 수 있어요.</span>
+      </li>
+      <li>
+        <strong>한눈에 보는 달력</strong>
+        <span>생리일·가임기·배란일을 색으로 구분해서 달력에서 바로 확인해요.</span>
+      </li>
+      <li>
+        <strong>맞춤 알림</strong>
+        <span>생리 예정, 배란 예정, 가임기, 오늘 기록까지 놓치지 않게 알려줘요.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>문의</h2>
+    <div class="contact-box">
+      <p>버그 제보, 기능 제안, 결제 문의 등 무엇이든 이메일로 편하게 알려주세요.</p>
+      <a class="mail-btn"
+         href="mailto:hope.tales.studio.27@gmail.com?subject=%5B%EB%8B%AC%EB%8B%AC%5D%20%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD&body=%EC%95%B1%20%EC%9D%B4%EB%A6%84%3A%20%EB%8B%AC%EB%8B%AC%0A%EA%B8%B0%EA%B8%B0%20%2F%20OS%20%EB%B2%84%EC%A0%84%3A%20%0A%EB%AC%B8%EC%9D%98%20%EC%9C%A0%ED%98%95(%EB%B2%84%EA%B7%B8%20%C2%B7%20%EA%B8%B0%EB%8A%A5%20%EC%A0%9C%EC%95%88%20%C2%B7%20%EA%B2%B0%EC%A0%9C%20%EB%AC%B8%EC%9D%98%20%C2%B7%20%EA%B8%B0%ED%83%80)%3A%20%0A%EC%83%81%EC%84%B8%20%EB%82%B4%EC%9A%A9%3A%20">
+        이메일로 문의하기
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <a href="/legal/daldal/privacy.html">개인정보처리방침</a>
+    <a href="/legal/daldal/terms.html">이용약관</a>
+    <div class="copyright">© 2026 Hope Tales Studio</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

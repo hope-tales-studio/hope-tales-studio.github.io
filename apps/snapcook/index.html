@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스냅쿡 - 있는 재료로 바로 레시피 | Hope Tales Studio</title>
+<meta name="description" content="냉장고 속 재료로, 지금 바로 만드는 AI 레시피. 찍고 → 바로 레시피 → 지금 해먹기.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="스냅쿡 - 있는 재료로 바로 레시피">
+<meta property="og:description" content="냉장고 속 재료로, 지금 바로 만드는 AI 레시피.">
+<meta property="og:url" content="https://hope-tales-studio.github.io/apps/snapcook/">
+<meta name="twitter:card" content="summary">
+<style>
+  :root {
+    --bg: #faf8fc;
+    --surface: #ffffff;
+    --text: #221f2b;
+    --text-muted: #6b6478;
+    --accent: #ff8a3d;
+    --accent-soft: #fff1e6;
+    --border: #f0e9e2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14121a;
+      --surface: #1d1a25;
+      --text: #f2f0f7;
+      --text-muted: #a8a1b8;
+      --accent: #ffab6b;
+      --accent-soft: #2c2338;
+      --border: #2c2735;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 32px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  header.app-header {
+    padding: 32px 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .app-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent), #ffc98a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    flex-shrink: 0;
+  }
+  header.app-header h1 {
+    font-size: 24px;
+    margin: 0 0 6px;
+  }
+  header.app-header p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 24px 0 40px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--text);
+    color: var(--bg);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .badge.disabled {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px dashed var(--border);
+    cursor: default;
+  }
+
+  section { padding: 32px 0; }
+  section h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+  }
+
+  .screenshots {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .screenshot-placeholder {
+    width: 170px;
+    height: 368px;
+    flex: none;
+    border-radius: 18px;
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .features li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    font-size: 14px;
+  }
+  .features li strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+  .features li span {
+    color: var(--text-muted);
+  }
+
+  .contact-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .contact-box p { color: var(--text-muted); font-size: 14px; margin: 0 0 18px; }
+  .mail-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  footer {
+    padding: 40px 0 60px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 8px;
+  }
+  footer a:hover { color: var(--accent); }
+  footer .copyright { margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="back-link" href="/">← Hope Tales Studio</a>
+
+  <header class="app-header">
+    <div class="app-icon">🍳</div>
+    <div>
+      <h1>스냅쿡 - 있는 재료로 바로 레시피</h1>
+      <p>냉장고 속 재료로, 지금 바로 만드는 AI 레시피</p>
+    </div>
+  </header>
+
+  <div class="badges">
+    <span class="badge disabled">App Store (출시 예정)</span>
+    <span class="badge disabled">Google Play (출시 예정)</span>
+  </div>
+
+  <section id="screenshots">
+    <h2>미리보기</h2>
+    <div class="screenshots">
+      <div class="screenshot-placeholder">스크린샷 1<br>(준비 중)</div>
+      <div class="screenshot-placeholder">스크린샷 2<br>(준비 중)</div>
+      <div class="screenshot-placeholder">스크린샷 3<br>(준비 중)</div>
+    </div>
+  </section>
+
+  <section id="features">
+    <h2>주요 기능</h2>
+    <ul class="features">
+      <li>
+        <strong>사진으로 재료 인식</strong>
+        <span>냉장고 속 재료를 사진으로 찍으면 AI가 자동으로 인식해요.</span>
+      </li>
+      <li>
+        <strong>텍스트·음성 입력</strong>
+        <span>재료를 직접 타이핑하거나 말로 입력할 수도 있어요.</span>
+      </li>
+      <li>
+        <strong>추가 재료 0개 우선 추천</strong>
+        <span>지금 있는 재료만으로 바로 만들 수 있는 레시피부터 보여줘요.</span>
+      </li>
+      <li>
+        <strong>기분·상황 맞춤 추천</strong>
+        <span>든든한, 가벼운, 술안주 등 지금 기분에 맞는 레시피를 골라줘요.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>문의</h2>
+    <div class="contact-box">
+      <p>버그 제보, 기능 제안, 결제 문의 등 무엇이든 이메일로 편하게 알려주세요.</p>
+      <a class="mail-btn"
+         href="mailto:hope.tales.studio.27@gmail.com?subject=%5B%EC%8A%A4%EB%83%85%EC%BF%A1%5D%20%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD&body=%EC%95%B1%20%EC%9D%B4%EB%A6%84%3A%20%EC%8A%A4%EB%83%85%EC%BF%A1%0A%EA%B8%B0%EA%B8%B0%20%2F%20OS%20%EB%B2%84%EC%A0%84%3A%20%0A%EB%AC%B8%EC%9D%98%20%EC%9C%A0%ED%98%95(%EB%B2%84%EA%B7%B8%20%C2%B7%20%EA%B8%B0%EB%8A%A5%20%EC%A0%9C%EC%95%88%20%C2%B7%20%EA%B2%B0%EC%A0%9C%20%EB%AC%B8%EC%9D%98%20%C2%B7%20%EA%B8%B0%ED%83%80)%3A%20%0A%EC%83%81%EC%84%B8%20%EB%82%B4%EC%9A%A9%3A%20">
+        이메일로 문의하기
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <a href="/legal/snapcook/privacy.html">개인정보처리방침</a>
+    <a href="/legal/snapcook/terms.html">이용약관</a>
+    <div class="copyright">© 2026 Hope Tales Studio</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
