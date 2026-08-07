@@ -119,6 +119,22 @@
   }
   .screenshots::-webkit-scrollbar { height: 8px; }
   .screenshots::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .screenshots-track {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .screenshots-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+  }
   .screenshot {
     width: 170px;
     height: 368px;
@@ -219,6 +235,7 @@
       <img class="screenshot" src="/apps/snapcook/assets/screenshot-8.png" alt="스냅쿡 레시피 목록 화면">
       <img class="screenshot" src="/apps/snapcook/assets/screenshot-9.png" alt="스냅쿡 레시피 상세 화면">
     </div>
+    <div class="screenshots-track"><div class="screenshots-thumb"></div></div>
   </section>
 
   <section id="features">
@@ -280,6 +297,19 @@
         e.preventDefault();
       }
     }, { passive: false });
+
+    const track = el.nextElementSibling;
+    const thumb = track instanceof HTMLElement ? track.querySelector('.screenshots-thumb') : null;
+    if (!(thumb instanceof HTMLElement)) return;
+    const updateThumb = function () {
+      const trackWidth = Number(track.clientWidth);
+      const ratio = trackWidth / el.scrollWidth;
+      thumb.style.width = (ratio * 100) + '%';
+      thumb.style.left = (el.scrollLeft / el.scrollWidth * 100) + '%';
+    };
+    el.addEventListener('scroll', updateThumb);
+    window.addEventListener('resize', updateThumb);
+    updateThumb();
   });
 </script>
 
