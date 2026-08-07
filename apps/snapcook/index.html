@@ -61,11 +61,7 @@
     width: 80px;
     height: 80px;
     border-radius: 20px;
-    background: linear-gradient(135deg, var(--accent), #ffc98a);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 38px;
+    object-fit: cover;
     flex-shrink: 0;
   }
   header.app-header h1 {
@@ -119,20 +115,13 @@
     overflow-x: auto;
     padding-bottom: 8px;
   }
-  .screenshot-placeholder {
+  .screenshot {
     width: 170px;
     height: 368px;
     flex: none;
     border-radius: 18px;
-    background: var(--surface);
-    border: 1px dashed var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-size: 13px;
-    text-align: center;
-    padding: 12px;
+    border: 1px solid var(--border);
+    object-fit: cover;
   }
 
   .features {
@@ -201,7 +190,7 @@
   <a class="back-link" href="/">← Hope Tales Studio</a>
 
   <header class="app-header">
-    <div class="app-icon">🍳</div>
+    <img class="app-icon" src="/apps/snapcook/assets/icon.png" alt="스냅쿡 앱 아이콘">
     <div>
       <h1>스냅쿡 - 있는 재료로 바로 레시피</h1>
       <p>냉장고 속 재료로, 지금 바로 만드는 AI 레시피</p>
@@ -216,9 +205,15 @@
   <section id="screenshots">
     <h2>미리보기</h2>
     <div class="screenshots">
-      <div class="screenshot-placeholder">스크린샷 1<br>(준비 중)</div>
-      <div class="screenshot-placeholder">스크린샷 2<br>(준비 중)</div>
-      <div class="screenshot-placeholder">스크린샷 3<br>(준비 중)</div>
+      <img class="screenshot" src="/apps/snapcook/assets/screenshot-1.png" alt="스냅쿡 온보딩 화면 1">
+      <img class="screenshot" src="/apps/snapcook/assets/screenshot-2.png" alt="스냅쿡 온보딩 화면 2">
+      <img class="screenshot" src="/apps/snapcook/assets/screenshot-3.png" alt="스냅쿡 온보딩 화면 3">
+      <img class="screenshot" src="/apps/snapcook/assets/screenshot-4.png" alt="스냅쿡 홈 화면">
+      <img class="screenshot" src="/apps/snapcook/assets/screenshot-5.png" alt="스냅쿡 재료 텍스트 입력 화면">
+      <img class="screenshot" src="/apps/snapcook/assets/screenshot-6.png" alt="스냅쿡 재료 확인 화면">
+      <img class="screenshot" src="/apps/snapcook/assets/screenshot-7.png" alt="스냅쿡 기분 입력 화면">
+      <img class="screenshot" src="/apps/snapcook/assets/screenshot-8.png" alt="스냅쿡 레시피 목록 화면">
+      <img class="screenshot" src="/apps/snapcook/assets/screenshot-9.png" alt="스냅쿡 레시피 상세 화면">
     </div>
   </section>
 
