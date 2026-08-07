@@ -114,7 +114,11 @@
     gap: 14px;
     overflow-x: auto;
     padding-bottom: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
   }
+  .screenshots::-webkit-scrollbar { height: 8px; }
+  .screenshots::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
   .screenshot {
     width: 170px;
     height: 368px;
@@ -265,6 +269,19 @@
   </footer>
 
 </div>
+
+<script>
+  document.querySelectorAll('div.screenshots').forEach(function (el) {
+    if (!(el instanceof HTMLElement)) return;
+    el.addEventListener('wheel', function (e) {
+      const dy = Number(e.deltaY);
+      if (Math.abs(dy) > Math.abs(e.deltaX)) {
+        el.scrollLeft = el.scrollLeft + dy;
+        e.preventDefault();
+      }
+    }, { passive: false });
+  });
+</script>
 
 </body>
 </html>

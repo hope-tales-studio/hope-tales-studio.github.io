@@ -114,7 +114,11 @@
     gap: 14px;
     overflow-x: auto;
     padding-bottom: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
   }
+  .screenshots::-webkit-scrollbar { height: 8px; }
+  .screenshots::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
   .screenshot {
     width: 170px;
     height: 368px;
@@ -236,6 +240,14 @@
         <strong>기분·상황 맞춤 추천</strong>
         <span>든든한, 가벼운, 술안주 등 지금 기분에 맞는 레시피를 골라줘요.</span>
       </li>
+      <li>
+        <strong>여러 레시피 후보 제안</strong>
+        <span>한 가지가 아니라 여러 레시피 중에서 마음에 드는 걸 골라볼 수 있어요.</span>
+      </li>
+      <li>
+        <strong>단계별 조리 가이드</strong>
+        <span>레시피 상세 화면에서 조리 순서를 하나씩 따라 하기 쉽게 안내해요.</span>
+      </li>
     </ul>
   </section>
 
@@ -257,6 +269,19 @@
   </footer>
 
 </div>
+
+<script>
+  document.querySelectorAll('div.screenshots').forEach(function (el) {
+    if (!(el instanceof HTMLElement)) return;
+    el.addEventListener('wheel', function (e) {
+      const dy = Number(e.deltaY);
+      if (Math.abs(dy) > Math.abs(e.deltaX)) {
+        el.scrollLeft = el.scrollLeft + dy;
+        e.preventDefault();
+      }
+    }, { passive: false });
+  });
+</script>
 
 </body>
 </html>
