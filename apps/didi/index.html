@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ㄷiㄷi - 여러 디데이를 한눈에, 홈 화면 위젯으로 | Hope Tales Studio</title>
+<meta name="description" content="시험·생일·기념일·여행·마감일까지, 여러 디데이를 귀엽고 가독성 있게 홈 화면 위젯으로 한눈에 확인하세요.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ㄷiㄷi - 여러 디데이를 한눈에, 홈 화면 위젯으로">
+<meta property="og:description" content="시험·생일·기념일·여행·마감일까지, 여러 디데이를 귀엽고 가독성 있게 홈 화면 위젯으로 한눈에 확인하세요.">
+<meta property="og:url" content="https://hope-tales-studio.github.io/apps/didi/">
+<meta name="twitter:card" content="summary">
+<style>
+  :root {
+    --bg: #fff8f9;
+    --surface: #ffffff;
+    --text: #2b2126;
+    --text-muted: #837178;
+    --accent: #ff6f91;
+    --accent-soft: #ffe7ec;
+    --border: #f5e3e7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1216;
+      --surface: #241a1f;
+      --text: #f7eef1;
+      --text-muted: #b8a3ab;
+      --accent: #ff9bb3;
+      --accent-soft: #3a2229;
+      --border: #352229;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 32px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .back-link:hover { color: var(--accent); }
+
+  header.app-header {
+    padding: 32px 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .app-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  header.app-header h1 {
+    font-size: 24px;
+    margin: 0 0 6px;
+  }
+  header.app-header p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 15px;
+  }
+
+  .badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 24px 0 40px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--text);
+    color: var(--bg);
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+  .badge.disabled {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px dashed var(--border);
+    cursor: default;
+  }
+
+  section { padding: 32px 0; }
+  section h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+  }
+
+  .features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+  .features li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    font-size: 14px;
+  }
+  .features li strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+  .features li span {
+    color: var(--text-muted);
+  }
+
+  .pricing {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .pricing .plan {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .pricing .plan .price {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .pricing .plan h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+  }
+  .pricing .plan p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  .contact-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+  }
+  .contact-box p { color: var(--text-muted); font-size: 14px; margin: 0 0 18px; }
+  .mail-btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  footer {
+    padding: 40px 0 60px;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 8px;
+  }
+  footer a:hover { color: var(--accent); }
+  footer .copyright { margin-top: 14px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="back-link" href="/">← Hope Tales Studio</a>
+
+  <header class="app-header">
+    <img class="app-icon" src="/apps/didi/assets/icon.png" alt="ㄷiㄷi 앱 아이콘">
+    <div>
+      <h1>ㄷiㄷi - 여러 디데이를 한눈에</h1>
+      <p>시험·생일·기념일·여행·마감일, 홈 화면 위젯으로 매일 확인하세요</p>
+    </div>
+  </header>
+
+  <div class="badges">
+    <span class="badge disabled">App Store (출시 예정)</span>
+    <span class="badge disabled">Google Play (출시 예정)</span>
+  </div>
+
+  <section id="features">
+    <h2>주요 기능</h2>
+    <ul class="features">
+      <li>
+        <strong>여러 디데이를 한 화면에</strong>
+        <span>다른 디데이 앱들이 놓친 "여러 개를 한눈에" 문제를 정면으로 해결해요.</span>
+      </li>
+      <li>
+        <strong>귀엽고 가독성 있는 멀티 위젯</strong>
+        <span>디데이를 여러 개 등록해도 지저분해지지 않고, 오히려 더 예뻐지는 위젯을 목표로 만들었어요.</span>
+      </li>
+      <li>
+        <strong>다양한 위젯 크기</strong>
+        <span>small/medium/large/extraLarge까지, 원하는 크기의 홈 화면 위젯을 자유롭게 배치하세요.</span>
+      </li>
+      <li>
+        <strong>취향대로 꾸미는 테마</strong>
+        <span>파스텔·스티커, 캐릭터·마스코트, 다크 모던 등 다양한 테마가 앱 화면과 위젯에 함께 적용돼요.</span>
+      </li>
+      <li>
+        <strong>카테고리 프리셋</strong>
+        <span>시험/생일/기념일/여행/마감일/기타 중 골라 이름을 자유롭게 붙일 수 있어요.</span>
+      </li>
+      <li>
+        <strong>완전 로컬, 완전한 프라이버시</strong>
+        <span>회원가입·로그인 없이, 입력한 정보는 기기 안에만 저장돼요.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="pricing">
+    <h2>이용 방법</h2>
+    <div class="pricing">
+      <div class="plan">
+        <span class="price">무료</span>
+        <h3>최대 5개 등록</h3>
+        <p>등록마다 리워드 광고 시청, 미니멀 큐트 테마 이용 가능. 위젯 자체엔 광고 없음.</p>
+      </div>
+      <div class="plan">
+        <span class="price">2,200원</span>
+        <h3>등록 무제한</h3>
+        <p>디데이 등록 개수 제한과 광고 시청 의무를 한번에 해제하는 일회성 구매.</p>
+      </div>
+      <div class="plan">
+        <span class="price">개별 1,100원</span>
+        <h3>테마</h3>
+        <p>파스텔·캐릭터·다크모던 등 테마를 원하는 것만 골라 구매할 수 있어요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>문의</h2>
+    <div class="contact-box">
+      <p>버그 제보, 기능 제안, 결제 문의 등 무엇이든 이메일로 편하게 알려주세요.</p>
+      <a class="mail-btn"
+         href="mailto:johanx1012@gmail.com?subject=%5B%EB%94%94%EB%94%94%5D%20%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD&body=%EC%95%B1%20%EC%9D%B4%EB%A6%84%3A%20%EB%94%94%EB%94%94%0A%EA%B8%B0%EA%B8%B0%20%2F%20OS%20%EB%B2%84%EC%A0%84%3A%20%0A%EB%AC%B8%EC%9D%98%20%EC%9C%A0%ED%98%95(%EB%B2%84%EA%B7%B8%20%C2%B7%20%EA%B8%B0%EB%8A%A5%20%EC%A0%9C%EC%95%88%20%C2%B7%20%EA%B2%B0%EC%A0%9C%20%EB%AC%B8%EC%9D%98%20%C2%B7%20%EA%B8%B0%ED%83%80)%3A%20%0A%EC%83%81%EC%84%B8%20%EB%82%B4%EC%9A%A9%3A%20">
+        이메일로 문의하기
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <a href="/policies/didi/privacy.html">개인정보처리방침</a>
+    <a href="/policies/didi/terms.html">이용약관</a>
+    <div class="copyright">© 2026 Hope Tales Studio</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
